@@ -8,7 +8,8 @@ import java.util.Objects;
 @Entity
 public class Employee {
     private @Id @GeneratedValue Long id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String role;
 
     public Employee() {
@@ -21,9 +22,10 @@ public class Employee {
         return id;
     }
 
-    public Employee(Long id, String name, String role) {
+    public Employee(Long id, String firstName,String lastName, String role) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.role = role;
     }
 
@@ -31,12 +33,13 @@ public class Employee {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
+    public String getLastName(){return firstName;}
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getRole() {
@@ -53,20 +56,21 @@ public class Employee {
         if (!(o instanceof Employee))
             return false;
         Employee employee = (Employee) o;
-        return getId().equals(employee.getId()) && Objects.equals(getName(), employee.getName()) && getRole().equals(employee.getRole());
+        return getId().equals(employee.getId()) && Objects.equals(getFirstName(), employee.getFirstName())&& Objects.equals(getLastName(), employee.getLastName()) && getRole().equals(employee.getRole());
     }
 
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id,this.name,this.role);
+        return Objects.hash(this.id,this.firstName,this.lastName,this.role);
     }
 
     @Override
     public String toString() {
         return "Employee{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + firstName + '\'' +
+                ",lastName='"+lastName+
                 ", role='" + role + '\'' +
                 '}';
     }
