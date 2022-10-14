@@ -16,8 +16,10 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 public class EmployeeController {
     private final EmployeeRepository repository;
-    public EmployeeController(EmployeeRepository repository){
+    private final EmployeeModelAssembler assembler;
+    public EmployeeController(EmployeeRepository repository,EmployeeModelAssembler employeeModelAssembler){
         this.repository = repository;
+        this.assembler = employeeModelAssembler;
     }
     @GetMapping("/employees")
     CollectionModel<EntityModel<Employee>> all(){
@@ -30,11 +32,16 @@ public class EmployeeController {
     public Employee newEmployee(@RequestBody Employee newEmployee){
         return repository.save(newEmployee);
     }
+    //@GetMapping("/employees/{id}")
+//    EntityModel<Employee> one(@PathVariable Long id){
+//        Employee employee = repository.findById(id).orElseThrow(()->new EmployeeNotFoundException(id));
+//        return EntityModel.of(employee,linkTo(methodOn(EmployeeController.class).one(id)).withSelfRel(),
+//                linkTo(methodOn(EmployeeController.class).all()).withRel("employees"));
+//    }
     @GetMapping("/employees/{id}")
-    EntityModel<Employee> one(@PathVariable Long id){
+    EntityModel<Employee>one(@PathVariable Long id){
         Employee employee = repository.findById(id).orElseThrow(()->new EmployeeNotFoundException(id));
-        return EntityModel.of(employee,linkTo(methodOn(EmployeeController.class).one(id)).withSelfRel(),
-                linkTo(methodOn(EmployeeController.class).all()).withRel("employees"));
+        return assembler.toModel(employee);
     }
     @PutMapping("/employees/{id}")
     public Employee replaceEmployee(@RequestBody Employee newEmployee,@PathVariable Long id){
