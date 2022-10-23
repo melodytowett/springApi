@@ -1,6 +1,5 @@
 package com.example.springApi.payroll;
 
-import com.example.springApi.Employee;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
