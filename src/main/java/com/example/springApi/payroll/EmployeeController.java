@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+//annotation that tells the employee class type of controller
 @RestController
 public class EmployeeController {
     private final EmployeeRepository repository;
@@ -20,6 +21,7 @@ public class EmployeeController {
         this.repository = repository;
         this.assembler = employeeModelAssembler;
     }
+    //define path and request type of the endpoint
     @GetMapping("/employees")
     CollectionModel<EntityModel<Employee>> all(){
     List<EntityModel<Employee>>employees = repository.findAll().stream()

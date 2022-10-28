@@ -1,4 +1,4 @@
-package com.example.springApi.payroll;
+package com.example.springApi.Order;
 
 public class OrderNotFoundException extends RuntimeException{
     public OrderNotFoundException(Long id) {

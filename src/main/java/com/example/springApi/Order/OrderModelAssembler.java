@@ -1,5 +1,7 @@
-package com.example.springApi.payroll;
+package com.example.springApi.Order;
 
+import com.example.springApi.Order.Order;
+import com.example.springApi.Order.OrderController;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
